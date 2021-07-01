@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behavior="clr-namespace:BehaviorTriggers.lib"
+             xmlns:lib="clr-namespace:BehaviorTriggers.lib"
              x:Class="BehaviorTriggers.MainPage">
 
     <StackLayout>
-        <Entry Placeholder="Digite o Seu Nome">
+        <Entry x:Name="txtNome" Placeholder="Digite o Seu Nome" Text="">
             <Entry.Behaviors>
-                <behavior:MaiusculoBehavior/>
+                <lib:MaiusculoBehavior/>
             </Entry.Behaviors>
             <!--O Trigger pode ser feito no xaml mesmo-->
             <Entry.Triggers>
@@ -17,6 +17,27 @@
                 </Trigger>
             </Entry.Triggers>
         </Entry>
+
+        <Entry Placeholder="Digite Seu E-mail">
+            <Entry.Triggers>
+                <EventTrigger Event="TextChanged">
+                    <lib:EmailValidoTrigger/>
+                </EventTrigger>                
+            </Entry.Triggers>
+        </Entry>
+
+        <!--O botão inicia desabilitado e fica desabilitado enquanto não tiver texto no entry-->
+        <Button Text="Enviar" TextColor="Black" BackgroundColor="Azure">
+            <Button.Triggers>
+                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference txtNome}, Path=Text.Length}" Value="0">
+                    <Setter Property="TextColor" Value="White"/>
+                    <Setter Property="BackgroundColor" Value="Gray"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>        
+                    
+                
+            </Button.Triggers>
+        </Button>
     </StackLayout>
 
 </ContentPage>
