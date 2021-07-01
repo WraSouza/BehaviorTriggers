@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior="clr-namespace:BehaviorTriggers.lib"
+             x:Class="BehaviorTriggers.MainPage">
+
+    <StackLayout>
+        <Entry Placeholder="Digite o Seu Nome">
+            <Entry.Behaviors>
+                <behavior:MaiusculoBehavior/>
+            </Entry.Behaviors>
+            <!--O Trigger pode ser feito no xaml mesmo-->
+            <Entry.Triggers>
+                <Trigger TargetType="Entry" Property="IsFocused" Value="true">
+                    <Setter Property="BackgroundColor" Value="Blue"/>
+                    <Setter Property="TextColor" Value="White"/>
+                </Trigger>
+            </Entry.Triggers>
+        </Entry>
+    </StackLayout>
+
+</ContentPage>
